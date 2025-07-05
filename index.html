@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Cardboard Mania&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script defer src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script defer src="app.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: sans-serif; background: #111; color: #fff; margin: 0; padding: 1em; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input, button, select { width: 100%; margin: 5px 0; padding: 0.75em; font-size: 1em; border-radius: 8px; border: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button { background: #00ff88; color: black; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hidden { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card { background: #222; padding: 10px; margin-top: 15px; border-radius: 10px; position: relative; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.preview { width: 100%; max-height: 200px; object-fit: contain; border-radius: 8px; margin-top: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.delete-btn { position: absolute; top: 10px; right: 10px; background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- LOGIN PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="loginPage"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Login to Cardboard Mania&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="email" id="email" placeholder="Email" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="password" id="password" placeholder="Password" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="login()"&gt;Login&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="signup()"&gt;Sign Up&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- DASHBOARD PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="dashboardPage" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="logout()"&gt;Logout&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Your Collections&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="foldersList"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="newFolderName" placeholder="New Folder Name" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="addFolder()"&gt;Add Folder&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- CARDS PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="cardsPage" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="showDashboard()"&gt;← Back to Collections&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2 id="folderTitle"&gt;&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="cardName" placeholder="Card Name" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="cardType" placeholder="Card Type (e.g. TCG)" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="condition" placeholder="Condition" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="number" id="purchasePrice" placeholder="Purchase Price" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="ebaySearch" placeholder="Search Term" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="file" id="cardImage" accept="image/*" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="scanCard()"&gt;Scan Card&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="addCard()"&gt;Add Card&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img id="preview" class="preview" style="display:none;" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="searchFilter" placeholder="Search cards..." oninput="filterCards()" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="cardList"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
